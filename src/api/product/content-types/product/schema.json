@@ -38,13 +38,29 @@
         "lip",
         "eyes",
         "compact",
-        "nail"
+        "nail",
+        "Dry",
+        "Normal",
+        "Oily",
+        "Sensitive"
       ],
       "required": true,
       "default": "foundation"
     },
     "price": {
       "type": "integer"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product",
+      "mappedBy": "product"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "products"
     }
   }
 }

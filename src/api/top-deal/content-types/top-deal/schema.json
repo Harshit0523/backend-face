@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "top_deals",
+  "info": {
+    "singularName": "top-deal",
+    "pluralName": "top-deals",
+    "displayName": "top-deal",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "img": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

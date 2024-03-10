@@ -379,11 +379,31 @@ export interface ApiProductProduct extends Schema.CollectionType {
     description: Attribute.Text;
     image: Attribute.Media;
     category: Attribute.Enumeration<
-      ['foundation', 'lip', 'eyes', 'compact', 'nail']
+      [
+        'foundation',
+        'lip',
+        'eyes',
+        'compact',
+        'nail',
+        'Dry',
+        'Normal',
+        'Oily',
+        'Sensitive'
+      ]
     > &
       Attribute.Required &
       Attribute.DefaultTo<'foundation'>;
     price: Attribute.Integer;
+    products: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::product.product'
+    >;
+    product: Attribute.Relation<
+      'api::product.product',
+      'manyToOne',
+      'api::product.product'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -395,6 +415,39 @@ export interface ApiProductProduct extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTopDealTopDeal extends Schema.CollectionType {
+  collectionName: 'top_deals';
+  info: {
+    singularName: 'top-deal';
+    pluralName: 'top-deals';
+    displayName: 'top-deal';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    price: Attribute.Integer;
+    img: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::top-deal.top-deal',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::top-deal.top-deal',
       'oneToOne',
       'admin::user'
     > &
@@ -834,6 +887,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::product.product': ApiProductProduct;
+      'api::top-deal.top-deal': ApiTopDealTopDeal;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
